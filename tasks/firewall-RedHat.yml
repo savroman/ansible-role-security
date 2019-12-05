@@ -1,0 +1,21 @@
+- name: Ensure FirewallD is running and enabled on boot.
+  service: 
+    name: firewalld 
+    state: started 
+    enabled: yes
+
+- name: Firewall enable services  
+  firewalld:
+    service: "{{ item }}"
+    permanent: yes
+    state: enabled
+  with_items: "{{ security_firewall_enable_service }}" 
+  notify: restart firewalld
+
+- name: Firewall enable open ports
+  firewalld:
+    port: "{{ item }}"
+    permanent: yes
+    state: enabled
+  with_items: "{{ security_firewall_open_ports }}"
+  notify: restart firewalld
