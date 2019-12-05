@@ -1,3 +1,15 @@
 ---
 - name: restart ssh
-  service: "name={{ security_sshd_name }} state=restarted"
+  service: 
+    name: "{{ security_sshd_name }}"
+    state: restarted
+
+- name: restart yum-cron
+  service: 
+    name: 'yum-cron'
+    state: restarted
+
+- name: restart firewalld
+  service: 
+    name: 'firewalld'
+    state: restarted
