@@ -18,7 +18,7 @@
   when: security_fail2ban_enabled | bool
 
 # SSH
-- include_tasks: ssh.yml
+#- include_tasks: ssh.yml
 
 # Autoupdate
 - include_tasks: autoupdate-RedHat.yml
@@ -30,3 +30,7 @@
   when:
     - ansible_os_family == 'Debian'
     - security_autoupdate_enabled | bool
+
+- include_tasks: firewall-RedHat.yml
+  when:
+    - ansible_os_family == 'RedHat'
